@@ -48,28 +48,28 @@ class Sobel: NSObject {
         for y in 0..<height {
             for x in 0..<width {
                 let gx = (
-                    Double(kernelX.columns.0.x) * getGray(image: image, x: x - 1, y: y - 1) +
-                    Double(kernelX.columns.0.y) * getGray(image: image, x: x - 1, y: y) +
-                    Double(kernelX.columns.0.z) * getGray(image: image, x: x - 1, y: y + 1) +
-                    Double(kernelX.columns.1.x) * getGray(image: image, x: x, y: y - 1) +
-                    Double(kernelX.columns.1.y) * getGray(image: image, x: x, y: y) +
-                    Double(kernelX.columns.1.z) * getGray(image: image, x: x, y: y + 1) +
-                    Double(kernelX.columns.2.x) * getGray(image: image, x: x + 1, y: y - 1) +
-                    Double(kernelX.columns.2.y) * getGray(image: image, x: x + 1, y: y) +
-                    Double(kernelX.columns.2.z) * getGray(image: image, x: x + 1, y: y + 1)
-                    )
+                        Double(kernelX.columns.0.x) * getGray(image: image, x: x - 1, y: y - 1) +
+                        Double(kernelX.columns.0.y) * getGray(image: image, x: x - 1, y: y) +
+                        Double(kernelX.columns.0.z) * getGray(image: image, x: x - 1, y: y + 1) +
+                        Double(kernelX.columns.1.x) * getGray(image: image, x: x, y: y - 1) +
+                        Double(kernelX.columns.1.y) * getGray(image: image, x: x, y: y) +
+                        Double(kernelX.columns.1.z) * getGray(image: image, x: x, y: y + 1) +
+                        Double(kernelX.columns.2.x) * getGray(image: image, x: x + 1, y: y - 1) +
+                        Double(kernelX.columns.2.y) * getGray(image: image, x: x + 1, y: y) +
+                        Double(kernelX.columns.2.z) * getGray(image: image, x: x + 1, y: y + 1)
+                )
                 let gy = (
-                    Double(kernelY.columns.0.x) * getGray(image: image, x: x - 1, y: y - 1) +
-                    Double(kernelY.columns.0.y) * getGray(image: image, x: x - 1, y: y) +
-                    Double(kernelY.columns.0.z) * getGray(image: image, x: x - 1, y: y + 1) +
-                    Double(kernelY.columns.1.x) * getGray(image: image, x: x, y: y - 1) +
-                    Double(kernelY.columns.1.y) * getGray(image: image, x: x, y: y) +
-                    Double(kernelY.columns.1.z) * getGray(image: image, x: x, y: y + 1) +
-                    Double(kernelY.columns.2.x) * getGray(image: image, x: x + 1, y: y - 1) +
-                    Double(kernelY.columns.2.y) * getGray(image: image, x: x + 1, y: y) +
-                    Double(kernelY.columns.2.z) * getGray(image: image, x: x + 1, y: y + 1)
-                    )
-                let g = sqrt(gx * gx + gy * gy)
+                        Double(kernelY.columns.0.x) * getGray(image: image, x: x - 1, y: y - 1) +
+                        Double(kernelY.columns.0.y) * getGray(image: image, x: x - 1, y: y) +
+                        Double(kernelY.columns.0.z) * getGray(image: image, x: x - 1, y: y + 1) +
+                        Double(kernelY.columns.1.x) * getGray(image: image, x: x, y: y - 1) +
+                        Double(kernelY.columns.1.y) * getGray(image: image, x: x, y: y) +
+                        Double(kernelY.columns.1.z) * getGray(image: image, x: x, y: y + 1) +
+                        Double(kernelY.columns.2.x) * getGray(image: image, x: x + 1, y: y - 1) +
+                        Double(kernelY.columns.2.y) * getGray(image: image, x: x + 1, y: y) +
+                        Double(kernelY.columns.2.z) * getGray(image: image, x: x + 1, y: y + 1)
+                )
+                let g = sqrt(pow(gx, 2) + pow(gy, 2))
                 
                 let bytesIndex = (width * y + x) * 4
                 
@@ -100,14 +100,14 @@ class Sobel: NSObject {
             return nil
         }
         let result = UIImage(cgImage: makeImage)
-    
+        
         return result
     }
     
     static func pointArray(highlightedEdgesImage: UIImage) -> [CGPoint] {
         
         var points = [CGPoint]()
-
+        
         guard let cgImage = highlightedEdgesImage.cgImage else {
             return points
         }
@@ -148,11 +148,11 @@ class Sobel: NSObject {
         if x < 0 || x >= width || y < 0 || y >= height {
             return 0
         }
-                
+        
         struct Holder {
             static var data: UnsafePointer<UInt8>? = nil
         }
-
+        
         if Holder.data == nil {
             guard let pixelData = cgImage.dataProvider?.data else {
                 return 0

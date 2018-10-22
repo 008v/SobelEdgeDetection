@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         let edgedImage = Sobel.sobelEdgeDetection(image: image!)
         
-        let points = Sobel.pointArray(highlightedEdgesImage: edgedImage!)
+        let _ = Sobel.pointArray(highlightedEdgesImage: edgedImage!)
         
         imageView.image = edgedImage
         
