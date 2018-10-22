@@ -6,7 +6,7 @@ Sobel edge detection written in Swift
 
 The edges of the image will be output as white pixel.
 
-```
+```Swift
 override func viewDidLoad() {
     super.viewDidLoad()
 
